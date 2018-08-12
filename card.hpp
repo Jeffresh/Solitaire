@@ -11,7 +11,7 @@ class Card
 
 public:
 
-	Card( Rank r = ACE, Suit s = SPADES): suit_{s}, rank_{r}{}
+	Card(Suit s = SPADES, Rank r = ACE): suit_{s}, rank_{r}{}
 
 	Suit suit()const{return suit_;}
 	Rank rank()const{return rank_;}
@@ -27,6 +27,9 @@ private:
 	static const char* n_suit[], * n_rank[];
 
 };
+
+bool solitaire (Card* cards, Rank* base);
+
 
 
 #endif // TCARD_HPP_

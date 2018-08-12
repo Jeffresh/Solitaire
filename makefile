@@ -1,5 +1,5 @@
 CXX = clang++
-OBJS = card.o solitaire.cpp test.cpp
+OBJS = card.o solitaire.o test.o
 
 all: main
 
