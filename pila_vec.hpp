@@ -1,5 +1,5 @@
-#ifndef PILA_VEC_H
-#define PILA_VEC_H
+#ifndef PILA_VEC_HPP
+#define PILA_VEC_HPP
 #include <cassert>
 
 
@@ -10,7 +10,7 @@ class Pila
 public:
 
 	explicit Pila(unsigned TamaMax);
-	Pila(const Pila& P)
+	Pila(const Pila& P);
 	Pila& operator=(const Pila& P);
 	bool vacia()const;
 	bool llena()const;
@@ -21,7 +21,7 @@ public:
 
 private:
 
-	*tElemento elementos;
+	tElemento* elementos;
 	int LMax;
 	int tope_;
 
@@ -32,14 +32,14 @@ private:
 template<typename tElemento>
 inline Pila<tElemento>::Pila(unsigned TamaMax):
 elementos(new tElemento [TamaMax]),
-Lmax(TamaMax),
+LMax(TamaMax),
 tope_(-1)
 {}
 
 template<typename tElemento>
 Pila<tElemento>::Pila(const Pila<tElemento>& P):
-elementos(new tElemento[P.Lmax]),
-Lmax(P.Lmax),
+elementos(new tElemento[P.LMax]),
+LMax(P.LMax),
 tope_(P.tope_)
 {
 	for(int i = 0; i<=tope_; i++)
@@ -54,11 +54,11 @@ Pila<tElemento>& Pila<tElemento>::operator=(const Pila<tElemento>& P)
 
 	if(this != &P)
 	{
-		if (Lmax != P.Lmax)
+		if (LMax != P.LMax)
 		{
 			delete[] elementos;
-			elementos = new tElemento[P.Lmax];
-			Lmax = P.Lmax;
+			elementos = new tElemento[P.LMax];
+			LMax = P.LMax;
 
 
 		}
@@ -76,14 +76,14 @@ Pila<tElemento>& Pila<tElemento>::operator=(const Pila<tElemento>& P)
 }
 
 template<typename tElemento>
-inline bool Pila<tElemento>::llena(){return tope_==Lmax -1;}
+inline bool Pila<tElemento>::llena()const{return tope_==LMax -1;}
 
 template<typename tElemento>
-inline bool Pila<tElemento>::vacia(){return tope_== -1; }
+inline bool Pila<tElemento>::vacia()const{return tope_== -1; }
 
 
-template<typename tElemento>const
-const tElemento& Pila<tElemento>::tope()
+template<typename tElemento>
+const tElemento& Pila<tElemento>::tope()const
 {
 	assert(!vacia());
 
@@ -99,7 +99,7 @@ inline void Pila<tElemento>::pop()
 }
 
 template<typename tElemento>
-inline void Pila<tElemento>push(const tElemento& x)
+inline void Pila<tElemento>::push(const tElemento& x)
 {
 	assert(!llena());
 
@@ -114,3 +114,4 @@ inline void Pila<tElemento>push(const tElemento& x)
 
 
 
+#endif //PILA_VEC_HPP

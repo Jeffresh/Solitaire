@@ -1,11 +1,11 @@
 #include "card.hpp"
 #include "pila_vec.hpp" // static queue
 
-bool solitaire (Card* cards, suit* base)
+bool solitaire (Card* cards, Rank* base)
 {
 	Pila<Card> deck{52}, pile{52}; // pila = queue
 
-	for (int = 0; i<52;i++)
+	for (int i = 0; i<52;i++)
 		deck.push(cards[i]);
 
 
@@ -23,9 +23,9 @@ bool solitaire (Card* cards, suit* base)
 
 		while(!deck.vacia()) // vacia = empty
 		{
-			while(!pile.vacia() && pile.tope().fig() == base[pile.tope().rank()]+1)
+			while(!pile.vacia() && pile.tope().rank() == base[pile.tope().suit()]+1)
 			{
-				base[pile.tope().rank()] = pile.tope().fig();
+				base[pile.tope().rank()] = pile.tope().rank();
 				pile.pop();
 				in_position++;
 
